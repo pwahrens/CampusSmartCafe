@@ -27,6 +27,7 @@ public abstract class FoodProvider {
 
 	public void updateDietaryAccount(Transaction transaction) {
 		// TODO
+
 	}
 
 	public void updateExpenseAccount(Transaction transaction) {
