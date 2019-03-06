@@ -1,4 +1,4 @@
-package gui;
+package front_end;
 
 public class MapView {
 
