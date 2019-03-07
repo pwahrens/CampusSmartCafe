@@ -4,21 +4,21 @@ import java.util.ArrayList;
 
 public class DietaryAccount {
 
-	private double calBalance;
+	private int calBalance;
 	private ArrayList<String> preferences;
 	private ArrayList<Transaction> transactions;
 
-	public DietaryAccount(double calBalance) {
+	public DietaryAccount(int calBalance) {
 		this.calBalance = calBalance;
 		preferences = new ArrayList<String>();
 		transactions = new ArrayList<Transaction>();
 	}
 
-	public double getCalBalance() {
+	public int getCalBalance() {
 		return calBalance;
 	}
 
-	public void setCalBalance(double calBalance) {
+	public void setCalBalance(int calBalance) {
 		this.calBalance = calBalance;
 	}
 
