@@ -36,4 +36,5 @@ public abstract class Food {
 	public ArrayList<String> getAttributes() {
 		return attributes;
 	}
+	
 }
