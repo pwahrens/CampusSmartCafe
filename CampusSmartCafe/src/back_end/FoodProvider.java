@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 public abstract class FoodProvider {
 	private ArrayList<Food> menu;
+	private int [] location;
 
-	public FoodProvider(ArrayList<Food> menu) {
+	public FoodProvider(ArrayList<Food> menu, int [] location) {
 		this.menu = menu;
+		this.location = location;
 	}
 
 	public ArrayList<Food> getMenu() {
@@ -16,13 +18,17 @@ public abstract class FoodProvider {
 	public void setMenu(ArrayList<Food> menu) {
 		this.menu = menu;
 	}
-
-	public void addFoodToMenu(Food food) {
-		this.menu.add(food);
+	
+	public int[] getLocation() {
+		return location;
 	}
 
-	public void removeFoodFromMenu(Food food) {
-		this.menu.remove(food);
+	public boolean addFoodToMenu(Food food) {
+		return this.menu.add(food);
+	}
+
+	public boolean removeFoodFromMenu(Food food) {
+		return this.menu.remove(food);
 	}
 
 	public void updateDietaryAccount(Transaction transaction) {
