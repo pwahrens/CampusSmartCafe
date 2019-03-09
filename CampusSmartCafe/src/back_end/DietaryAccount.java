@@ -21,6 +21,10 @@ public class DietaryAccount {
 	public void setCalBalance(int calBalance) {
 		this.calBalance = calBalance;
 	}
+	
+	public void decrementCalBalance(int amount) {
+		this.setCalBalance(this.calBalance - amount);
+	}
 
 	public ArrayList<String> getPreferences() {
 		return preferences;

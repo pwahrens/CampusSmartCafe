@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public abstract class Food {
 	private String name;
-	private double calCount;
+	private int calCount;
 	private double price;
 	private ArrayList<String> attributes;
 
-	public Food(String name, double CalCount, double price) {
+	public Food(String name, int CalCount, double price) {
 		this.name = name;
 		this.calCount = CalCount;
 		this.price = price;
@@ -23,7 +23,7 @@ public abstract class Food {
 		this.name = name;
 	}
 
-	public double getCalCount() {
+	public int getCalCount() {
 		return calCount;
 	}
 

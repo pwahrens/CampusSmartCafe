@@ -18,6 +18,10 @@ public class ExpenseAccount {
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
+	
+	public void decrementBalance(double amount) {
+		this.setBalance(this.balance - amount);
+	}
 
 	public ArrayList<Transaction> getTransactions() {
 		return transactions;
