@@ -3,12 +3,21 @@ package back_end;
 import java.util.ArrayList;
 
 public abstract class FoodProvider {
+	private String name;
 	private ArrayList<Food> menu;
 	private int[] location;
 
-	public FoodProvider(ArrayList<Food> menu, int[] location) {
+	public FoodProvider(String name, ArrayList<Food> menu, int[] location) {
+		this.name = name;
 		this.menu = menu;
 		this.location = location;
+	}
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public ArrayList<Food> getMenu() {
