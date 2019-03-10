@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
-public class loginGUI extends JFrame implements ActionListener{
+public class LoginView extends JFrame implements ActionListener{
 
-	public loginGUI()
+	public LoginView()
 	{
 		super("Login Window");
 	}

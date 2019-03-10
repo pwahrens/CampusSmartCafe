@@ -5,7 +5,7 @@ public class User {
 	private ExpenseAccount expenseAccount;
 	private DietaryAccount dietaryAccount;
 
-	public User(String userName, String password) {
+	public User(String password) {
 		this.password = password;
 		expenseAccount = new ExpenseAccount(0);
 		dietaryAccount = new DietaryAccount(2000);
