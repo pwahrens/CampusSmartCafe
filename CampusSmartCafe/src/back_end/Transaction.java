@@ -5,18 +5,38 @@ import java.util.Arrays;
 public class Transaction {
 	private User user;
 	private double totalCost;
-	private int calCost;
+	private int cal, sodaCal, snackCal, mealCal;
 	private Food[] purchases;
 
 	public Transaction(User user, Food[] purchases) {
 		this.user = user;
 		this.purchases = purchases;
+		this.cal=this.mealCal=this.snackCal=this.sodaCal= 0;
 		this.totalCost = 0;
+		
 
 		for (int i = 0; i < this.purchases.length; ++i) {
 			this.totalCost += purchases[i].getPrice();
-			this.calCost += purchases[i].getCalCount();
+			this.cal += purchases[i].getCalCount();
+			if(purchases[i] instanceof Meal)
+				mealCal += purchases[i].getCalCount();
+			if(purchases[i] instanceof Snack)
+				snackCal += purchases[i].getCalCount();
+			if(purchases[i] instanceof Soda)
+				sodaCal += purchases[i].getCalCount();
 		}
+	}
+
+	public int getSodaCal() {
+		return sodaCal;
+	}
+
+	public int getSnackCal() {
+		return snackCal;
+	}
+
+	public int getMealCal() {
+		return mealCal;
 	}
 
 	public User getUser() {
@@ -27,8 +47,8 @@ public class Transaction {
 		return totalCost;
 	}
 
-	public int getCalCost() {
-		return calCost;
+	public int getCal() {
+		return cal;
 	}
 	public Food[] getPurchases() {
 		return purchases;

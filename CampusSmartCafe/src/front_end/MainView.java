@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
 import back_end.Cafe;
+import back_end.DietaryAccount;
 import back_end.ExpenseAccount;
 import back_end.Food;
 import back_end.Meal;
@@ -21,7 +22,8 @@ public class MainView {
 		CampusMapView mapView = new CampusMapView();
 		
 		ExpenseAccountView expenseAccountView = new ExpenseAccountView(new ExpenseAccount(0));
-
+		DietaryAccountView dietaryAccountView = new DietaryAccountView(new DietaryAccount(2000));
+		
 		// TODO test code probably best located somewhere else
 		ArrayList<Food> menu = new ArrayList<Food>();
 		menu.add(new Meal("Pizza", 200, 5));
@@ -29,9 +31,10 @@ public class MainView {
 		menu.add(new Meal("Salad", 175, 5));
 		FoodProviderView foodProviderView = new FoodProviderView(new Cafe("Pete's", menu, new Point(100, 100)));
 
-		tabbedPane.addTab("Expenses", expenseAccountView);
-		tabbedPane.addTab("Pete's", foodProviderView);
 		tabbedPane.addTab("Map", mapView);
+		tabbedPane.addTab("Pete's", foodProviderView);
+		tabbedPane.addTab("Expenses", expenseAccountView);
+		tabbedPane.addTab("Diet", dietaryAccountView);
 		frame.add(tabbedPane, BorderLayout.CENTER);
 
 		frame.setSize(600, 800);
