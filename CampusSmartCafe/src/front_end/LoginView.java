@@ -19,8 +19,8 @@ public class LoginView extends Observable implements ActionListener{
 
 	private JLabel uLabel, pLabel;
 	private JTextField uField, pField;
-	private JPanel uPanel, pPanel, returnerPanel, newUserPanel, nUsernamePanel, newPassPanel, rePassPanel, mainPanel;
-	private JButton loginButton;
+	private JPanel uPanel, pPanel, returnerPanel;
+	protected JButton loginButton;
 	private User currentUser;
 	UserValidator userValidator;
 	
@@ -66,6 +66,7 @@ public class LoginView extends Observable implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		
 		currentUser = userValidator.login(uField.getText(),pField.getText());
 		if(currentUser==null)
 		{

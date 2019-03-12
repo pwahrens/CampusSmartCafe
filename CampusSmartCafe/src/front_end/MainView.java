@@ -30,7 +30,7 @@ public class MainView {
 		userData.addUser("billyBob", "bob123");
 		UserValidator userValid = new UserValidator(userData);
 		
-		LoginView loginView = new LoginView(userValid);
+		LoginView loginView = new LoginTotalView(userValid);
 		CampusMapView mapView = new CampusMapView();
 		
 		ExpenseAccountView expenseAccountView = new ExpenseAccountView(new ExpenseAccount(0));
