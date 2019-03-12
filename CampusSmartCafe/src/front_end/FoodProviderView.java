@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -24,7 +25,7 @@ public class FoodProviderView extends JPanel implements ActionListener {
 
 	public FoodProviderView(FoodProvider foodProvider) {
 		this.setLayout(new BorderLayout());
-
+		
 		this.foodProvider = foodProvider;
 
 		this.orderButton = new JButton("Order");
@@ -36,6 +37,7 @@ public class FoodProviderView extends JPanel implements ActionListener {
 		this.add(this.nameLabel, BorderLayout.NORTH);
 
 		this.menuPanel = new JPanel();
+		this.menuPanel.setLayout(new BoxLayout(this.menuPanel, BoxLayout.Y_AXIS));
 		ArrayList<Food> menuOptions = this.foodProvider.getMenu();
 		this.menuItems = new JCheckBox[menuOptions.size()];
 
@@ -65,4 +67,7 @@ public class FoodProviderView extends JPanel implements ActionListener {
 
 	}
 
+	public FoodProvider getFoodProvider() {
+		return foodProvider;
+	}
 }

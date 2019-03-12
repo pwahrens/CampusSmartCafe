@@ -41,6 +41,6 @@ public abstract class Food {
 
 	@Override
 	public String toString() {
-		return "Food [name=" + name + ", calCount=" + calCount + ", price=" + price + "]";
+		return name + ", Calories: " + calCount + ", Price: $" + price;
 	}
 }
