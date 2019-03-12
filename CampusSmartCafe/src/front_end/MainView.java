@@ -12,12 +12,15 @@ import back_end.DietaryAccount;
 import back_end.ExpenseAccount;
 import back_end.Food;
 import back_end.Meal;
+import back_end.User;
 import back_end.UserManager;
 import back_end.UserValidator;
 
 public class MainView {
-	private User currentUser;
+
 	public static void main(String[] args) {
+		User currentUser=null;
+		
 		JFrame frame = new JFrame("CampusSmartCafe");
 		frame.setLayout(new BorderLayout());
 		JTabbedPane tabbedPane = new JTabbedPane();
@@ -30,7 +33,7 @@ public class MainView {
 		LoginView loginView = new LoginView(userValid);
 		CampusMapView mapView = new CampusMapView();
 		
-		ExpenseAccountView expenseAccountView = new ExpenseAccountView(currentUser);
+		ExpenseAccountView expenseAccountView = new ExpenseAccountView(new ExpenseAccount(0));
 		DietaryAccountView dietaryAccountView = new DietaryAccountView(new DietaryAccount(2000));
 		
 		// TODO test code probably best located somewhere else
@@ -40,7 +43,7 @@ public class MainView {
 		menu.add(new Meal("Salad", 175, 5));
 		FoodProviderView foodProviderView = new FoodProviderView(new Cafe("Pete's", menu, new Point(100, 100)));
 
-		tabbedPane.addTab("Login", loginView);
+		tabbedPane.addTab("Login", loginView.getLoginPanel());
 		tabbedPane.addTab("Map", mapView);
 		tabbedPane.addTab("Pete's", foodProviderView);
 		tabbedPane.addTab("Expenses", expenseAccountView);
