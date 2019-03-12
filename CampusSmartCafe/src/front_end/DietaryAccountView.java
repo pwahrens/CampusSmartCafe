@@ -85,6 +85,14 @@ public class DietaryAccountView extends JPanel implements ActionListener{
 		this.dietaryAccount.setMaxCalBalance(newCalBalance);
 
 		this.calBalanceLabel.setText("Daily Calories: " + this.dietaryAccount.getMaxCalBalance());
+		
+		int nums[] = {dietaryAccount.getCalBalance(),mCal,snCal,soCal};
+		barGraph = new BarGraphView(nums);
+		
+		unusedCalLabel.setText("Unused: " + dietaryAccount.getCalBalance());
+		
+		this.revalidate();
+		this.repaint();
 	}
 
 }

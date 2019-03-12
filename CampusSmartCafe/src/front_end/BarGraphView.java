@@ -16,7 +16,9 @@ public class BarGraphView extends JPanel{
 	
     public BarGraphView(int[] calData) {
     		for (int i=0; i<barColors.length; ++i) {
-                    bars.put(barColors[i],calData[i]);
+    			if(calData[i]<0)
+    				calData[i]=0;
+                bars.put(barColors[i],calData[i]);
             }
     }
 

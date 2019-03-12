@@ -16,11 +16,13 @@ import back_end.UserManager;
 import back_end.UserValidator;
 
 public class MainView {
+	private User currentUser;
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("CampusSmartCafe");
 		frame.setLayout(new BorderLayout());
 		JTabbedPane tabbedPane = new JTabbedPane();
 
+		
 		UserManager userData = new UserManager();
 		userData.addUser("billyBob", "bob123");
 		UserValidator userValid = new UserValidator(userData);
@@ -28,7 +30,7 @@ public class MainView {
 		LoginView loginView = new LoginView(userValid);
 		CampusMapView mapView = new CampusMapView();
 		
-		ExpenseAccountView expenseAccountView = new ExpenseAccountView(new ExpenseAccount(0));
+		ExpenseAccountView expenseAccountView = new ExpenseAccountView(currentUser);
 		DietaryAccountView dietaryAccountView = new DietaryAccountView(new DietaryAccount(2000));
 		
 		// TODO test code probably best located somewhere else
