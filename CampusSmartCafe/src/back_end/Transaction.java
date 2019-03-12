@@ -1,18 +1,21 @@
 package back_end;
 
 import java.util.Arrays;
+import java.util.Date;
 
 public class Transaction {
 	private User user;
 	private double totalCost;
 	private int cal, sodaCal, snackCal, mealCal;
 	private Food[] purchases;
+	private Date date;
 
 	public Transaction(User user, Food[] purchases) {
 		this.user = user;
 		this.purchases = purchases;
 		this.cal=this.mealCal=this.snackCal=this.sodaCal= 0;
 		this.totalCost = 0;
+		this.date = new Date();
 		
 
 		for (int i = 0; i < this.purchases.length; ++i) {
@@ -26,7 +29,11 @@ public class Transaction {
 				sodaCal += purchases[i].getCalCount();
 		}
 	}
-
+	
+	public Date getDate()
+	{
+		return date;
+	}
 	public int getSodaCal() {
 		return sodaCal;
 	}

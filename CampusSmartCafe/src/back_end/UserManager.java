@@ -27,9 +27,10 @@ public class UserManager {
 		return true;
 	}
 	
-	public boolean addUser(String userName, User temp)
+	public boolean addUser(String userName, String password)
 	{
 		boolean successful;
+		User temp = new User(password);
 		if(successful=(!users.containsKey(userName)))
 			users.put(userName, temp);
 		return successful;

@@ -12,6 +12,8 @@ import back_end.DietaryAccount;
 import back_end.ExpenseAccount;
 import back_end.Food;
 import back_end.Meal;
+import back_end.UserManager;
+import back_end.UserValidator;
 
 public class MainView {
 	public static void main(String[] args) {
@@ -19,6 +21,11 @@ public class MainView {
 		frame.setLayout(new BorderLayout());
 		JTabbedPane tabbedPane = new JTabbedPane();
 
+		UserManager userData = new UserManager();
+		userData.addUser("billyBob", "bob123");
+		UserValidator userValid = new UserValidator(userData);
+		
+		LoginView loginView = new LoginView(userValid);
 		CampusMapView mapView = new CampusMapView();
 		
 		ExpenseAccountView expenseAccountView = new ExpenseAccountView(new ExpenseAccount(0));
@@ -31,6 +38,7 @@ public class MainView {
 		menu.add(new Meal("Salad", 175, 5));
 		FoodProviderView foodProviderView = new FoodProviderView(new Cafe("Pete's", menu, new Point(100, 100)));
 
+		tabbedPane.addTab("Login", loginView);
 		tabbedPane.addTab("Map", mapView);
 		tabbedPane.addTab("Pete's", foodProviderView);
 		tabbedPane.addTab("Expenses", expenseAccountView);
