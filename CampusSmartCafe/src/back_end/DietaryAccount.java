@@ -5,11 +5,12 @@ import java.util.ArrayList;
 public class DietaryAccount {
 
 	private int calBalance;
+	private int maxCalBalance;
 	private ArrayList<String> preferences;
 	private ArrayList<Transaction> transactions;
 
 	public DietaryAccount(int calBalance) {
-		this.calBalance = calBalance;
+		this.maxCalBalance = this.calBalance = calBalance;
 		preferences = new ArrayList<String>();
 		transactions = new ArrayList<Transaction>();
 	}
@@ -17,13 +18,19 @@ public class DietaryAccount {
 	public int getCalBalance() {
 		return calBalance;
 	}
+	
+	public int getMaxCalBalance() {
+		return maxCalBalance;
+	}
 
-	public void setCalBalance(int calBalance) {
-		this.calBalance = calBalance;
+	public void setMaxCalBalance(int calBalance) {
+		this.maxCalBalance = calBalance;
+		if(this.maxCalBalance<this.calBalance)
+			this.maxCalBalance = this.calBalance;
 	}
 	
 	public void decrementCalBalance(int amount) {
-		this.setCalBalance(this.calBalance - amount);
+		this.calBalance -= amount;
 	}
 
 	public ArrayList<String> getPreferences() {
@@ -43,6 +50,6 @@ public class DietaryAccount {
 	}
 
 	public void addTransaction(Transaction transactions) {
-		this.transactions.add(transactions);
+			this.transactions.add(transactions);
 	}
 }
