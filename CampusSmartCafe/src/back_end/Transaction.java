@@ -1,5 +1,7 @@
 package back_end;
 
+import java.util.Arrays;
+
 public class Transaction {
 	private User user;
 	private double totalCost;
@@ -25,5 +27,11 @@ public class Transaction {
 
 	public Food[] getPurchases() {
 		return purchases;
+	}
+
+	@Override
+	public String toString() {
+		return "Transaction [user=" + user + ", totalCost=" + totalCost + ", purchases=" + Arrays.toString(purchases)
+				+ "]";
 	}
 }

@@ -1,17 +1,19 @@
 package back_end;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 public abstract class FoodProvider {
 	private String name;
 	private ArrayList<Food> menu;
-	private int[] location;
+	private Point location;
 
-	public FoodProvider(String name, ArrayList<Food> menu, int[] location) {
+	public FoodProvider(String name, ArrayList<Food> menu, Point location) {
 		this.name = name;
 		this.menu = menu;
 		this.location = location;
 	}
+
 	public String getName() {
 		return name;
 	}
@@ -28,7 +30,7 @@ public abstract class FoodProvider {
 		this.menu = menu;
 	}
 
-	public int[] getLocation() {
+	public Point getLocation() {
 		return location;
 	}
 

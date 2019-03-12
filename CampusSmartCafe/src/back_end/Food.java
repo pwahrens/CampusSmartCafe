@@ -38,5 +38,9 @@ public abstract class Food {
 	public ArrayList<String> getAttributes() {
 		return attributes;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Food [name=" + name + ", calCount=" + calCount + ", price=" + price + "]";
+	}
 }
