@@ -5,9 +5,9 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -15,12 +15,12 @@ import javax.swing.JTextField;
 import back_end.User;
 import back_end.UserValidator;
 
-public class LoginView extends JPanel implements ActionListener{
+public class LoginView extends Observable implements ActionListener{
 
 	private JLabel uLabel, pLabel;
 	private JTextField uField, pField;
-	private JPanel uPanel, pPanel;
-	private JButton loginButton;
+	private JPanel uPanel, pPanel, returnerPanel;
+	protected JButton loginButton;
 	private User currentUser;
 	UserValidator userValidator;
 	
@@ -30,13 +30,15 @@ public class LoginView extends JPanel implements ActionListener{
 		currentUser=null;
 		this.userValidator = userValidator;
 		
-		this.setLayout(new BorderLayout());
+		
 		
 		uPanel = new JPanel();
 		pPanel = new JPanel();
+		returnerPanel = new JPanel();
 		
 		uPanel.setLayout(new FlowLayout());
 		pPanel.setLayout(new FlowLayout());
+		returnerPanel.setLayout(new BorderLayout());
 		
 		uField = new JTextField(20);
 		pField = new JTextField(20);
@@ -53,13 +55,18 @@ public class LoginView extends JPanel implements ActionListener{
 		pPanel.add(pLabel);
 		pPanel.add(pField);
 		
-		this.add(uPanel, BorderLayout.NORTH);
-		this.add(pPanel, BorderLayout.CENTER);
-		this.add(loginButton, BorderLayout.SOUTH);
-		
+		returnerPanel.add(uPanel, BorderLayout.NORTH);
+		returnerPanel.add(pPanel, BorderLayout.CENTER);
+		returnerPanel.add(loginButton, BorderLayout.SOUTH);		
+	}
+	
+	public JPanel getLoginPanel()
+	{
+		return returnerPanel;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		
 		currentUser = userValidator.login(uField.getText(),pField.getText());
 		if(currentUser==null)
 		{

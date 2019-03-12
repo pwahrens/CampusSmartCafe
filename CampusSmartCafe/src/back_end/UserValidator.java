@@ -17,7 +17,10 @@ public class UserValidator {
 			temp=users.getUser(userName);
 		return temp;
 	}
-	
+	public UserManager getUserManager()
+	{
+		return users;
+	}
 	private boolean checkPassword(String userName, String password)
 	{
 		User subject;
