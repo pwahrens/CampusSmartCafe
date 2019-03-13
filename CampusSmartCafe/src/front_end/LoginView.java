@@ -2,11 +2,15 @@ package front_end;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,15 +34,13 @@ public class LoginView extends Observable implements ActionListener{
 		currentUser=null;
 		this.userValidator = userValidator;
 		
-		
-		
 		uPanel = new JPanel();
 		pPanel = new JPanel();
 		returnerPanel = new JPanel();
 		
 		uPanel.setLayout(new FlowLayout());
 		pPanel.setLayout(new FlowLayout());
-		returnerPanel.setLayout(new BorderLayout());
+		returnerPanel.setLayout(new BoxLayout(returnerPanel,1));
 		
 		uField = new JTextField(20);
 		pField = new JTextField(20);
@@ -48,6 +50,7 @@ public class LoginView extends Observable implements ActionListener{
 		
 		loginButton = new JButton("Login");
 		loginButton.addActionListener(this);
+		loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		uPanel.add(uLabel);
 		uPanel.add(uField);
@@ -55,9 +58,13 @@ public class LoginView extends Observable implements ActionListener{
 		pPanel.add(pLabel);
 		pPanel.add(pField);
 		
-		returnerPanel.add(uPanel, BorderLayout.NORTH);
-		returnerPanel.add(pPanel, BorderLayout.CENTER);
-		returnerPanel.add(loginButton, BorderLayout.SOUTH);		
+		returnerPanel.add(uPanel);
+		returnerPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+		returnerPanel.add(pPanel);
+		returnerPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+		returnerPanel.add(loginButton);
+		
+		
 	}
 	
 	public JPanel getLoginPanel()

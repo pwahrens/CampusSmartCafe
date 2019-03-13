@@ -3,6 +3,7 @@ package front_end;
 import java.awt.BorderLayout;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;

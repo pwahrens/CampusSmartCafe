@@ -1,9 +1,13 @@
 package front_end;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,7 +17,7 @@ import back_end.UserValidator;
 
 public class LoginTotalView extends LoginView implements ActionListener{
 
-	private JPanel newUserPanel1, newUserPanel2, usernamePanel,passwordPanel,repasswordPanel, loginViewTotal;
+	private JPanel newUserPanel, usernamePanel,passwordPanel,repasswordPanel, loginViewTotal;
 	private JTextField newUsername, newPassword, retypePassword;
 	private JLabel userLabel, passLabel, repassLabel;
 	private JButton newUserButton;
@@ -21,8 +25,7 @@ public class LoginTotalView extends LoginView implements ActionListener{
 	{
 		super(userValidator);
 		
-		newUserPanel1 = new JPanel();
-		newUserPanel2 = new JPanel();
+		newUserPanel = new JPanel();
 		usernamePanel = new JPanel();
 		passwordPanel = new JPanel();
 		repasswordPanel = new JPanel();
@@ -37,31 +40,40 @@ public class LoginTotalView extends LoginView implements ActionListener{
 		repassLabel = new JLabel("Retype Password: ");
 		
 		newUserButton = new JButton("Create User");
+		newUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		newUserButton.addActionListener(this);
 		
+		
 		usernamePanel.add(userLabel);
+		usernamePanel.add(Box.createVerticalGlue());
 		usernamePanel.add(newUsername);
 		
 		passwordPanel.add(passLabel);
+		passwordPanel.add(Box.createVerticalGlue());
 		passwordPanel.add(newPassword);
 		
 		repasswordPanel.add(repassLabel);
+		repasswordPanel.add(Box.createVerticalGlue());
 		repasswordPanel.add(retypePassword);
 		
-		newUserPanel1.setLayout(new BorderLayout());
-		newUserPanel2.setLayout(new BorderLayout());
+		newUserPanel.setLayout(new BoxLayout(newUserPanel, 1));
+		//newUserPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		loginViewTotal.setLayout(new BorderLayout());
 		
-		newUserPanel1.add(usernamePanel, BorderLayout.NORTH);
-		newUserPanel1.add(passwordPanel, BorderLayout.CENTER);
-		newUserPanel1.add(retypePassword, BorderLayout.SOUTH);
+		newUserPanel.add(new JLabel("Or if you are a new user..."));
+		newUserPanel.add(usernamePanel);
+		newUserPanel.add(Box.createVerticalGlue());
+		newUserPanel.add(passwordPanel);
+		newUserPanel.add(Box.createVerticalGlue());
+		newUserPanel.add(repasswordPanel);
+		newUserPanel.add(Box.createVerticalGlue());
+		newUserPanel.add(newUserButton);
 		
-		newUserPanel2.add(new JLabel("Or if you are a new user..."), BorderLayout.NORTH);
-		newUserPanel2.add(newUserPanel1, BorderLayout.CENTER);
-		newUserPanel2.add(newUserButton, BorderLayout.SOUTH);
 		
 		loginViewTotal.add(super.getLoginPanel(), BorderLayout.NORTH);
-		loginViewTotal.add(newUserPanel2, BorderLayout.SOUTH);
+		loginViewTotal.add(Box.createVerticalGlue());
+		loginViewTotal.add(newUserPanel, BorderLayout.CENTER);
+		loginViewTotal.add(Box.createRigidArea(new Dimension(10, 400)), BorderLayout.SOUTH);
 		
 	}
 	
