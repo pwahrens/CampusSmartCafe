@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 
 import back_end.Food;
 import back_end.FoodProvider;
+import back_end.Transaction;
+import back_end.User;
 
 public class FoodProviderView extends JPanel implements ActionListener {
 	private FoodProvider foodProvider;
@@ -25,7 +27,7 @@ public class FoodProviderView extends JPanel implements ActionListener {
 
 	public FoodProviderView(FoodProvider foodProvider) {
 		this.setLayout(new BorderLayout());
-		
+
 		this.foodProvider = foodProvider;
 
 		this.orderButton = new JButton("Order");
@@ -53,18 +55,31 @@ public class FoodProviderView extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO prompt login and then create a transaction
+		if (MainView.currentUser != null) {
+			User user = MainView.currentUser;
+			ArrayList<Food> selectedItems = new ArrayList<Food>();
 
-		ArrayList<Food> selectedItems = new ArrayList<Food>();
+			for (int i = 0; i < this.menuItems.length; i++) {
+				if (this.menuItems[i].isSelected()) {
+					selectedItems.add(this.foodProvider.getMenu().get(i));
+				}
+			}
 
-		for (int i = 0; i < this.menuItems.length; i++) {
-			if (this.menuItems[i].isSelected()) {
-				selectedItems.add(this.foodProvider.getMenu().get(i));
+			Food[] selectedItemsArray = (Food[]) selectedItems.toArray();
+
+			Transaction transaction = new Transaction(user, selectedItemsArray);
+
+			Boolean insufficientBalance = user.getExpenseAccount().getBalance() < transaction.getTotalCost();
+			Boolean insufficientCalBal = user.getDietaryAccount().getCalBalance() < transaction.getCal();
+
+			if (insufficientBalance) {
+				// TODO not enough money
+			} else if (insufficientCalBal) {
+				// TODO not enough calories
+			} else {
+				// TODO add transaction to accounts and close the order window
 			}
 		}
-
-		System.out.println(Arrays.toString(selectedItems.toArray())); // TODO change to transaction object stuff
-
 	}
 
 	public FoodProvider getFoodProvider() {
