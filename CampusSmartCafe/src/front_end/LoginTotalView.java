@@ -145,7 +145,7 @@ public class LoginTotalView extends Observable implements ActionListener{
 			newPassword.setForeground(Color.BLACK);
 			retypePassword.setForeground(Color.BLACK);
 			
-			if(!newPassword.getPassword().equals(retypePassword.getPassword()))
+			if(!String.valueOf(newPassword.getPassword()).equals(String.valueOf(retypePassword.getPassword())))
 			{
 				newPassword.setForeground(Color.RED);
 				retypePassword.setForeground(Color.RED);
