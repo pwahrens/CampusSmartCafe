@@ -11,6 +11,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import back_end.Food;
@@ -73,11 +74,11 @@ public class FoodProviderView extends JPanel implements ActionListener {
 			Boolean insufficientCalBal = user.getDietaryAccount().getCalBalance() < transaction.getCal();
 
 			if (insufficientBalance) {
-				// TODO not enough money
+				JOptionPane.showMessageDialog(null, "Not enough balance in expense account");
 			} else if (insufficientCalBal) {
-				// TODO not enough calories
+				JOptionPane.showMessageDialog(null, "Exceeding your calorie balance");
 			} else {
-				// TODO add transaction to accounts and close the order window
+				this.foodProvider.updateAccounts(transaction);
 			}
 		}
 	}
