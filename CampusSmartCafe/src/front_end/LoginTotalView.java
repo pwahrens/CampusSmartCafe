@@ -7,35 +7,40 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import back_end.User;
 import back_end.UserValidator;
 
-public class LoginTotalView implements ActionListener{
+public class LoginTotalView extends Observable implements ActionListener{
 
 	private JLabel uLabel, pLabel;
-	private JTextField uField, pField;
+	private JTextField uField, newUsername;
 	private JPanel uPanel, pPanel, returnerPanel;
 	protected JButton loginButton;
 	protected static User currentUser;
 	UserValidator userValidator;
 	private JPanel newUserPanel, usernamePanel,passwordPanel,repasswordPanel, loginViewTotal;
-	private JTextField newUsername, newPassword, retypePassword;
+	private JPasswordField newPassword, retypePassword, pField;
 	private JLabel userLabel, passLabel, repassLabel;
 	private JButton newUserButton;
 	
-	public LoginTotalView(UserValidator userValidator)
+	public LoginTotalView(UserValidator userValidator, Observer o)
 	{
 		currentUser=null;
 		this.userValidator = userValidator;
+		
+		this.addObserver(o);
 		
 		uPanel = new JPanel();
 		pPanel = new JPanel();
@@ -46,7 +51,7 @@ public class LoginTotalView implements ActionListener{
 		returnerPanel.setLayout(new BoxLayout(returnerPanel,BoxLayout.PAGE_AXIS));
 		
 		uField = new JTextField(20);
-		pField = new JTextField(20);
+		pField = new JPasswordField(20);
 		
 		uLabel = new JLabel("Username: ");
 		pLabel = new JLabel("Password: ");
@@ -76,8 +81,8 @@ public class LoginTotalView implements ActionListener{
 		loginViewTotal = new JPanel();
 		
 		newUsername = new JTextField(20);
-		newPassword = new JTextField(20);
-		retypePassword = new JTextField(20);
+		newPassword = new JPasswordField(20);
+		retypePassword = new JPasswordField(20);
 		
 		userLabel = new JLabel("New Username: ");
 		passLabel = new JLabel("New Password: ");
@@ -121,7 +126,7 @@ public class LoginTotalView implements ActionListener{
 			uField.setForeground(Color.BLACK);
 			pField.setForeground(Color.BLACK);
 		
-			currentUser = userValidator.login(uField.getText(),pField.getText());
+			currentUser = userValidator.login(uField.getText(),String.valueOf(pField.getPassword()));
 			if(currentUser==null)
 			{
 				uField.setForeground(Color.RED);
@@ -140,18 +145,18 @@ public class LoginTotalView implements ActionListener{
 			newPassword.setForeground(Color.BLACK);
 			retypePassword.setForeground(Color.BLACK);
 			
-			if(!newPassword.getText().equals(retypePassword.getText()))
+			if(!newPassword.getPassword().equals(retypePassword.getPassword()))
 			{
 				newPassword.setForeground(Color.RED);
 				retypePassword.setForeground(Color.RED);
 			}
 			else
 			{
-				if(!userValidator.getUserManager().addUser(newUsername.getText(), newPassword.getText()))
+				if(!userValidator.getUserManager().addUser(newUsername.getText(), String.valueOf(newPassword.getPassword())))
 					newUsername.setForeground(Color.RED);
 				else
 				{
-					currentUser=userValidator.login(newUsername.getText(), newPassword.getText());
+					currentUser=userValidator.login(newUsername.getText(), String.valueOf(newPassword.getPassword()));
 					newUsername.setForeground(Color.GREEN);
 					newPassword.setForeground(Color.GREEN);
 					retypePassword.setForeground(Color.GREEN);
@@ -159,6 +164,7 @@ public class LoginTotalView implements ActionListener{
 				
 			}
 		}
+		this.notifyObservers(currentUser);
 	}
 	
 	public JPanel getLoginPanel()
