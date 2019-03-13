@@ -1,6 +1,7 @@
 package front_end;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -45,35 +46,29 @@ public class LoginTotalView extends LoginView implements ActionListener{
 		
 		
 		usernamePanel.add(userLabel);
-		usernamePanel.add(Box.createVerticalGlue());
 		usernamePanel.add(newUsername);
 		
 		passwordPanel.add(passLabel);
-		passwordPanel.add(Box.createVerticalGlue());
 		passwordPanel.add(newPassword);
 		
 		repasswordPanel.add(repassLabel);
-		repasswordPanel.add(Box.createVerticalGlue());
 		repasswordPanel.add(retypePassword);
 		
-		newUserPanel.setLayout(new BoxLayout(newUserPanel, 1));
+		newUserPanel.setLayout(new BoxLayout(newUserPanel, BoxLayout.PAGE_AXIS));
 		//newUserPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		loginViewTotal.setLayout(new BorderLayout());
 		
 		newUserPanel.add(new JLabel("Or if you are a new user..."));
 		newUserPanel.add(usernamePanel);
-		newUserPanel.add(Box.createVerticalGlue());
 		newUserPanel.add(passwordPanel);
-		newUserPanel.add(Box.createVerticalGlue());
 		newUserPanel.add(repasswordPanel);
-		newUserPanel.add(Box.createVerticalGlue());
 		newUserPanel.add(newUserButton);
+		newUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
 		loginViewTotal.add(super.getLoginPanel(), BorderLayout.NORTH);
-		loginViewTotal.add(Box.createVerticalGlue());
-		loginViewTotal.add(newUserPanel, BorderLayout.CENTER);
-		loginViewTotal.add(Box.createRigidArea(new Dimension(10, 400)), BorderLayout.SOUTH);
+		loginViewTotal.add(newUserPanel);
+		loginViewTotal.add(Box.createRigidArea(new Dimension(10, 375)), BorderLayout.SOUTH);
 		
 	}
 	
@@ -82,10 +77,28 @@ public class LoginTotalView extends LoginView implements ActionListener{
 			super.actionPerformed(e);
 		else
 		{
+			newUsername.setForeground(Color.BLACK);
+			newPassword.setForeground(Color.BLACK);
+			retypePassword.setForeground(Color.BLACK);
+			
 			if(!newPassword.getText().equals(retypePassword.getText()))
-				return;
+			{
+				newPassword.setForeground(Color.RED);
+				retypePassword.setForeground(Color.RED);
+			}
 			else
-				userValidator.getUserManager().addUser(newUsername.getText(), newPassword.getText());
+			{
+				if(!userValidator.getUserManager().addUser(newUsername.getText(), newPassword.getText()))
+					newUsername.setForeground(Color.RED);
+				else
+				{
+					currentUser=userValidator.login(newUsername.getText(), newPassword.getText());
+					newUsername.setForeground(Color.GREEN);
+					newPassword.setForeground(Color.GREEN);
+					retypePassword.setForeground(Color.GREEN);
+				}
+				
+			}
 		}
 	}
 	

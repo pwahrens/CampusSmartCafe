@@ -25,7 +25,7 @@ public class LoginView extends Observable implements ActionListener{
 	private JTextField uField, pField;
 	private JPanel uPanel, pPanel, returnerPanel;
 	protected JButton loginButton;
-	private User currentUser;
+	protected static User currentUser;
 	UserValidator userValidator;
 	
 	
@@ -40,7 +40,7 @@ public class LoginView extends Observable implements ActionListener{
 		
 		uPanel.setLayout(new FlowLayout());
 		pPanel.setLayout(new FlowLayout());
-		returnerPanel.setLayout(new BoxLayout(returnerPanel,1));
+		returnerPanel.setLayout(new BoxLayout(returnerPanel,BoxLayout.PAGE_AXIS));
 		
 		uField = new JTextField(20);
 		pField = new JTextField(20);
@@ -73,6 +73,9 @@ public class LoginView extends Observable implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		
+		uField.setForeground(Color.BLACK);
+		pField.setForeground(Color.BLACK);
 		
 		currentUser = userValidator.login(uField.getText(),pField.getText());
 		if(currentUser==null)
