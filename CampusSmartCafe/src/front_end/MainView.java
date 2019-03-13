@@ -34,7 +34,7 @@ public class MainView {
 		userData.readFromFile();
 		UserValidator userValid = new UserValidator(userData);
 
-		LoginView loginView = new LoginTotalView(userValid);
+		LoginTotalView loginView = new LoginTotalView(userValid);
 		CampusMapView mapView = new CampusMapView();
 
 		ExpenseAccountView expenseAccountView = new ExpenseAccountView(new ExpenseAccount(0));

@@ -19,7 +19,7 @@ public class DietaryAccount implements Serializable {
 		int total=0;
 		for(int i=0; i<transactions.size(); i++)
 			total+=transactions.get(i).getCal();
-		return total;
+		return maxCalBalance-total;
 	}
 	
 	public int getMaxCalBalance() {
