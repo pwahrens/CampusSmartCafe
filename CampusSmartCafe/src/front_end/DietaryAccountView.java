@@ -27,6 +27,7 @@ public class DietaryAccountView extends JPanel implements ActionListener{
 
 		this.maxCalPanel = new JPanel();
 		this.prefPanel = new JPanel();
+		this.topPanel = new JPanel();
 		
 		maxCalPanel.setLayout(new FlowLayout());
 		prefPanel.setLayout(new FlowLayout());
@@ -44,6 +45,9 @@ public class DietaryAccountView extends JPanel implements ActionListener{
 		this.maxCalPanel.add(this.calBalanceTextField);
 		this.prefField = new JTextField(20);
 		this.maxCalPanel.add(this.prefField);
+		
+		this.topPanel.add(maxCalPanel);
+		this.topPanel.add(prefPanel);
 		
 
 		this.calBalanceTextField.addActionListener(this);
