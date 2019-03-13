@@ -164,6 +164,8 @@ public class LoginTotalView extends Observable implements ActionListener{
 				
 			}
 		}
+		
+		setChanged();
 		this.notifyObservers(currentUser);
 	}
 	

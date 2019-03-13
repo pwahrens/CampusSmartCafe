@@ -42,69 +42,36 @@ public class UserManager {
 	}
 
 	public void readFromFile() {
-		Scanner in = null;
+		FileInputStream fileStream = null;
 
 		try {
-			in = new Scanner(new File("usernames.txt"));
-		} catch (FileNotFoundException ex) {
-			ex.printStackTrace();
+			fileStream = new FileInputStream("userdata.txt");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
 
-		while (in.hasNextLine()) {
-			String username = in.nextLine();
-
-			FileInputStream fileStream = null;
-
-			try {
-				fileStream = new FileInputStream("userdata.txt");
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-
-			ObjectInputStream objectStream = null;
-
-			try {
-				objectStream = new ObjectInputStream(fileStream);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			Object userObject = null;
-
-			try {
-				userObject = objectStream.readObject();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			if (userObject instanceof User) {
-				User loadedUser = (User) userObject;
-
-				this.addUser(username, loadedUser.getPassword());
-
-				User user = this.getUser(username);
-				user.setDietaryAccount(loadedUser.getDietaryAccount());
-				user.setExpenseAccount(loadedUser.getExpenseAccount());
-			}
-		}
-	}
-
-	public void writeToFile() {
-		FileWriter writer = null;
+		ObjectInputStream objectStream = null;
 
 		try {
-			writer = new FileWriter("usernames.txt", false);
-			for (Map.Entry<String, User> userEntry : users.entrySet()) {
-				writer.write(userEntry.getKey() + "\n");
-			}
-
-			writer.close();
+			objectStream = new ObjectInputStream(fileStream);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
+		Object usersObject = null;
+
+		try {
+			usersObject = objectStream.readObject();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		this.users = (Map<String, User>) usersObject;
+	}
+
+	public void writeToFile() {
 		FileOutputStream fileStream = null;
 
 		try {
@@ -121,13 +88,10 @@ public class UserManager {
 			e1.printStackTrace();
 		}
 
-		for (Map.Entry<String, User> userEntry : users.entrySet()) {
-			User value = userEntry.getValue();
-			try {
-				objectStream.writeObject(value);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		try {
+			objectStream.writeObject(this.users);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }
