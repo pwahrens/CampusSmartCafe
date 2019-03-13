@@ -49,7 +49,7 @@ public abstract class FoodProvider {
 		for (int i = 0; i < transaction.getPurchases().length; ++i) {
 			Food item = transaction.getPurchases()[i];
 
-			dietaryAccount.decrementCalBalance(item.getCalCount());
+			//dietaryAccount.decrementCalBalance(item.getCalCount());
 			expenseAccount.decrementBalance(item.getPrice());
 		}
 	}
