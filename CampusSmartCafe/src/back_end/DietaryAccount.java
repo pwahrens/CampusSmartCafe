@@ -1,9 +1,10 @@
 package back_end;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DietaryAccount {
-
+public class DietaryAccount implements Serializable {
+	
 	private int calBalance;
 	private int maxCalBalance;
 	private ArrayList<String> preferences;
@@ -51,5 +52,10 @@ public class DietaryAccount {
 
 	public void addTransaction(Transaction transactions) {
 			this.transactions.add(transactions);
+	}
+	
+	@Override
+	public String toString() {
+		return calBalance + ";" + maxCalBalance + ";" + preferences + ";" + transactions;
 	}
 }

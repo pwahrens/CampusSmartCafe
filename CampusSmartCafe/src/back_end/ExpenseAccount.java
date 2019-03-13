@@ -1,8 +1,9 @@
 package back_end;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ExpenseAccount {
+public class ExpenseAccount implements Serializable {
 	private double balance;
 	private ArrayList<Transaction> transactions;
 
@@ -29,5 +30,10 @@ public class ExpenseAccount {
 
 	public void addTransaction(Transaction transactions) {
 		this.transactions.add(transactions);
+	}
+
+	@Override
+	public String toString() {
+		return balance + ";" + transactions;
 	}
 }

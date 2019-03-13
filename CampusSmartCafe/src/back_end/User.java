@@ -1,6 +1,8 @@
 package back_end;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 	private String password;
 	private ExpenseAccount expenseAccount;
 	private DietaryAccount dietaryAccount;
@@ -27,4 +29,11 @@ public class User {
 		return dietaryAccount;
 	}
 
+	public void setExpenseAccount(ExpenseAccount expenseAccount) {
+		this.expenseAccount = expenseAccount;
+	}
+
+	public void setDietaryAccount(DietaryAccount dietaryAccount) {
+		this.dietaryAccount = dietaryAccount;
+	}
 }
