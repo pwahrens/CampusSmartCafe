@@ -16,9 +16,9 @@ import back_end.Transaction;
 public class DietaryAccountView extends JPanel implements ActionListener{
 	private BarGraphView barGraph;
 	private DietaryAccount dietaryAccount;
-	private JTextField calBalanceTextField;
-	private JLabel calBalanceLabel, newCalLabel, unusedCalLabel, mealCalLabel, snackCalLabel, sodaCalLabel;
-	private JPanel maxCalPanel,graphLabelPanel;
+	private JTextField calBalanceTextField, prefField;
+	private JLabel calBalanceLabel, newCalLabel, unusedCalLabel, mealCalLabel, snackCalLabel, sodaCalLabel, prefLabel, newPref;
+	private JPanel maxCalPanel, prefPanel, graphLabelPanel, topPanel;
 	private int mCal, snCal, soCal, totalCal;
 	public DietaryAccountView(DietaryAccount dietaryAccount) {
 		this.setLayout(new BorderLayout());
@@ -26,19 +26,33 @@ public class DietaryAccountView extends JPanel implements ActionListener{
 		this.dietaryAccount = dietaryAccount;
 
 		this.maxCalPanel = new JPanel();
+		this.prefPanel = new JPanel();
+		this.topPanel = new JPanel();
+		
 		maxCalPanel.setLayout(new FlowLayout());
+		prefPanel.setLayout(new FlowLayout());
 		
 		this.calBalanceLabel = new JLabel("Daily Calories: " + this.dietaryAccount.getMaxCalBalance());
 		this.maxCalPanel.add(this.calBalanceLabel);
 		this.newCalLabel = new JLabel("        Set a New Daily Calorie Limit: ");
 		this.maxCalPanel.add(this.newCalLabel);
+		this.prefLabel = new JLabel("Preferences: " + this.dietaryAccount.getPreferences());
+		this.prefPanel.add(prefLabel);
+		this.newPref = new JLabel("   New Preference: ");
+		this.prefPanel.add(newPref);
 		
 		this.calBalanceTextField = new JTextField(6);
 		this.maxCalPanel.add(this.calBalanceTextField);
+		this.prefField = new JTextField(20);
+		this.maxCalPanel.add(this.prefField);
+		
+		this.topPanel.add(maxCalPanel);
+		this.topPanel.add(prefPanel);
+		
 
 		this.calBalanceTextField.addActionListener(this);
 		
-		this.add(maxCalPanel, BorderLayout.NORTH);
+		this.add(topPanel, BorderLayout.NORTH);
 		
 		//this.transactionPanel = new JPanel();
 		ArrayList<Transaction> transactions = this.dietaryAccount.getTransactions();
@@ -72,25 +86,39 @@ public class DietaryAccountView extends JPanel implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		int newCalBalance = this.dietaryAccount.getMaxCalBalance();
+		if(e.getSource()==calBalanceTextField)
+		{
+			int newCalBalance = this.dietaryAccount.getMaxCalBalance();
 		
-		try {
-			String temp = calBalanceTextField.getText();
-			newCalBalance= Integer.parseInt(temp);
-		} catch (Exception ex){
-			ex.printStackTrace();
-			return;
-		}
+			try {
+				String temp = calBalanceTextField.getText();
+				newCalBalance= Integer.parseInt(temp);
+			} catch (Exception ex){
+				ex.printStackTrace();
+				return;
+				}
 		
-		this.dietaryAccount.setMaxCalBalance(newCalBalance);
+			this.dietaryAccount.setMaxCalBalance(newCalBalance);
 
-		this.calBalanceLabel.setText("Daily Calories: " + this.dietaryAccount.getMaxCalBalance());
+			this.calBalanceLabel.setText("Daily Calories: " + this.dietaryAccount.getMaxCalBalance());
 		
-		int nums[] = {dietaryAccount.getCalBalance(),mCal,snCal,soCal};
-		barGraph = new BarGraphView(nums);
+			int nums[] = {dietaryAccount.getCalBalance(),mCal,snCal,soCal};
+			barGraph = new BarGraphView(nums);
 		
-		unusedCalLabel.setText("Unused: " + dietaryAccount.getCalBalance());
-		
+			unusedCalLabel.setText("Unused: " + dietaryAccount.getCalBalance());
+		}
+		if(e.getSource()==prefField)
+		{
+			if(prefField.getText().equals("Delete"))
+				this.dietaryAccount.removePreferences();
+			
+			else
+			{
+				this.dietaryAccount.addPreference(prefField.getText());
+				this.prefLabel = new JLabel("Preferences: " + this.dietaryAccount.getPreferences());
+			}
+			
+		}
 		this.revalidate();
 		this.repaint();
 	}

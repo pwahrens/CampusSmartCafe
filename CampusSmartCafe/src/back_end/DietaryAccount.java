@@ -40,8 +40,8 @@ public class DietaryAccount implements Serializable {
 		return this.preferences.add(preference);
 	}
 
-	public boolean removePreference(String preference) {
-		return preferences.remove(preference);
+	public boolean removePreferences() {
+		return preferences.removeAll(preferences);
 	}
 
 	public ArrayList<Transaction> getTransactions() {
