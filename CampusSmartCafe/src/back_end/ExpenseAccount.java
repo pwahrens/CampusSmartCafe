@@ -20,7 +20,7 @@ public class ExpenseAccount implements Serializable {
 		this.balance = balance;
 	}
 	
-	public void decrementBalance(double amount) {
+	private void decrementBalance(double amount) {
 		this.setBalance(this.balance - amount);
 	}
 
@@ -30,6 +30,7 @@ public class ExpenseAccount implements Serializable {
 
 	public void addTransaction(Transaction transactions) {
 		this.transactions.add(transactions);
+		this.decrementBalance(transactions.getTotalCost());
 	}
 
 	@Override

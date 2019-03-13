@@ -8,14 +8,12 @@ public class Transaction {
 	private double totalCost;
 	private int cal, sodaCal, snackCal, mealCal;
 	private Food[] purchases;
-	private Date date;
 
 	public Transaction(User user, Food[] purchases) {
 		this.user = user;
 		this.purchases = purchases;
 		this.cal = this.mealCal = this.snackCal = this.sodaCal = 0;
 		this.totalCost = 0;
-		this.date = new Date();
 
 		for (int i = 0; i < this.purchases.length; ++i) {
 			this.totalCost += purchases[i].getPrice();
@@ -27,10 +25,6 @@ public class Transaction {
 			if (purchases[i] instanceof Soda)
 				sodaCal += purchases[i].getCalCount();
 		}
-	}
-
-	public Date getDate() {
-		return date;
 	}
 
 	public int getSodaCal() {

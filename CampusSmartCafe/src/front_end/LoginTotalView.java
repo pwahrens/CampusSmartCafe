@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,18 +14,60 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
+import back_end.User;
 import back_end.UserValidator;
 
-public class LoginTotalView extends LoginView implements ActionListener{
+public class LoginTotalView implements ActionListener{
 
+	private JLabel uLabel, pLabel;
+	private JTextField uField, pField;
+	private JPanel uPanel, pPanel, returnerPanel;
+	protected JButton loginButton;
+	protected static User currentUser;
+	UserValidator userValidator;
 	private JPanel newUserPanel, usernamePanel,passwordPanel,repasswordPanel, loginViewTotal;
 	private JTextField newUsername, newPassword, retypePassword;
 	private JLabel userLabel, passLabel, repassLabel;
 	private JButton newUserButton;
+	
 	public LoginTotalView(UserValidator userValidator)
 	{
-		super(userValidator);
+		currentUser=null;
+		this.userValidator = userValidator;
+		
+		uPanel = new JPanel();
+		pPanel = new JPanel();
+		returnerPanel = new JPanel();
+		
+		uPanel.setLayout(new FlowLayout());
+		pPanel.setLayout(new FlowLayout());
+		returnerPanel.setLayout(new BoxLayout(returnerPanel,BoxLayout.PAGE_AXIS));
+		
+		uField = new JTextField(20);
+		pField = new JTextField(20);
+		
+		uLabel = new JLabel("Username: ");
+		pLabel = new JLabel("Password: ");
+		
+		loginButton = new JButton("Login");
+		loginButton.addActionListener(this);
+		loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		uPanel.add(uLabel);
+		uPanel.add(uField);
+		
+		pPanel.add(pLabel);
+		pPanel.add(pField);
+		
+		returnerPanel.add(uPanel);
+		returnerPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+		returnerPanel.add(pPanel);
+		returnerPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+		returnerPanel.add(loginButton);
+		
+		
 		
 		newUserPanel = new JPanel();
 		usernamePanel = new JPanel();
@@ -41,7 +84,7 @@ public class LoginTotalView extends LoginView implements ActionListener{
 		repassLabel = new JLabel("Retype Password: ");
 		
 		newUserButton = new JButton("Create User");
-		newUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		newUserButton.setHorizontalAlignment(SwingConstants.CENTER);
 		newUserButton.addActionListener(this);
 		
 		
@@ -66,7 +109,7 @@ public class LoginTotalView extends LoginView implements ActionListener{
 		newUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
-		loginViewTotal.add(super.getLoginPanel(), BorderLayout.NORTH);
+		loginViewTotal.add(returnerPanel, BorderLayout.NORTH);
 		loginViewTotal.add(newUserPanel);
 		loginViewTotal.add(Box.createRigidArea(new Dimension(10, 375)), BorderLayout.SOUTH);
 		
@@ -74,7 +117,23 @@ public class LoginTotalView extends LoginView implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==loginButton)
-			super.actionPerformed(e);
+		{
+			uField.setForeground(Color.BLACK);
+			pField.setForeground(Color.BLACK);
+		
+			currentUser = userValidator.login(uField.getText(),pField.getText());
+			if(currentUser==null)
+			{
+				uField.setForeground(Color.RED);
+				pField.setForeground(Color.RED);
+			}
+			else
+			{
+				uField.setForeground(Color.GREEN);
+				pField.setForeground(Color.GREEN);
+			}
+		}
+		
 		else
 		{
 			newUsername.setForeground(Color.BLACK);

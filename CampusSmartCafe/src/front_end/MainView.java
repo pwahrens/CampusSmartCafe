@@ -35,12 +35,12 @@ public class MainView implements Observer {
 		this.frame.setLayout(new BorderLayout());
 
 		this.tabbedPane = new JTabbedPane();
-
 		this.userData = new UserManager();
 		this.userData.readFromFile();
 
+
 		UserValidator userValid = new UserValidator(this.userData);
-		LoginView loginView = new LoginTotalView(userValid, this);
+		LoginTotalView loginView = new LoginTotalView(userValid, this);
 
 		this.tabbedPane.addTab("Login", loginView.getLoginPanel());
 

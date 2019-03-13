@@ -4,20 +4,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class DietaryAccount implements Serializable {
-	
-	private int calBalance;
+
 	private int maxCalBalance;
 	private ArrayList<String> preferences;
 	private ArrayList<Transaction> transactions;
 
 	public DietaryAccount(int calBalance) {
-		this.maxCalBalance = this.calBalance = calBalance;
+		this.maxCalBalance = calBalance;
 		preferences = new ArrayList<String>();
 		transactions = new ArrayList<Transaction>();
 	}
 
 	public int getCalBalance() {
-		return calBalance;
+		int total=0;
+		for(int i=0; i<transactions.size(); i++)
+			total+=transactions.get(i).getCal();
+		return maxCalBalance-total;
 	}
 	
 	public int getMaxCalBalance() {
@@ -26,14 +28,10 @@ public class DietaryAccount implements Serializable {
 
 	public void setMaxCalBalance(int calBalance) {
 		this.maxCalBalance = calBalance;
-		if(this.maxCalBalance<this.calBalance)
-			this.maxCalBalance = this.calBalance;
+		if(this.maxCalBalance<this.getCalBalance())
+			this.maxCalBalance = this.getCalBalance();
 	}
 	
-	public void decrementCalBalance(int amount) {
-		this.calBalance -= amount;
-	}
-
 	public ArrayList<String> getPreferences() {
 		return preferences;
 	}
@@ -54,8 +52,13 @@ public class DietaryAccount implements Serializable {
 			this.transactions.add(transactions);
 	}
 	
+	public void clearTransactions()
+	{
+		this.transactions.removeAll(transactions);
+	}
+	
 	@Override
 	public String toString() {
-		return calBalance + ";" + maxCalBalance + ";" + preferences + ";" + transactions;
+		return this.getCalBalance() + ";" + maxCalBalance + ";" + preferences + ";" + transactions;
 	}
 }
