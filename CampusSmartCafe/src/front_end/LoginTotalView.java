@@ -106,7 +106,9 @@ public class LoginTotalView extends Observable implements ActionListener{
 		//newUserPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		loginViewTotal.setLayout(new BorderLayout());
 		
-		newUserPanel.add(new JLabel("Or if you are a new user..."));
+		JLabel temp = new JLabel("Or if you are a new user...");
+		temp.setAlignmentX(Component.CENTER_ALIGNMENT);
+		newUserPanel.add(temp);
 		newUserPanel.add(usernamePanel);
 		newUserPanel.add(passwordPanel);
 		newUserPanel.add(repasswordPanel);
