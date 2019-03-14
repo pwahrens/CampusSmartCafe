@@ -129,25 +129,23 @@ public class DietaryAccountView extends JPanel implements ActionListener, Observ
 	
 	public void update(Observable o, Object arg)
 	{
-
-		int newCalBalance = this.dietaryAccount.getMaxCalBalance();
-	
-		try {
-			String temp = calBalanceTextField.getText();
-			newCalBalance= Integer.parseInt(temp);
-		} catch (Exception ex){
-			ex.printStackTrace();
-			return;
-			}
-	
-		this.dietaryAccount.setMaxCalBalance(newCalBalance);
-
 		this.calBalanceLabel.setText("Daily Calories: " + this.dietaryAccount.getMaxCalBalance());
+		
+		ArrayList<Transaction> transactions = this.dietaryAccount.getTransactions();
+		
+		for (int i = 0; i < transactions.size(); ++i) {
+			mCal = transactions.get(i).getMealCal();
+			snCal = transactions.get(i).getSnackCal();
+			soCal = transactions.get(i).getSodaCal();
+		}
 	
 		int nums[] = {dietaryAccount.getCalBalance(),mCal,snCal,soCal};
 		barGraph = new BarGraphView(nums);
 	
 		unusedCalLabel.setText("Unused: " + dietaryAccount.getCalBalance());
+		
+		this.revalidate();
+		this.repaint();
 	}
 	
 
