@@ -25,7 +25,13 @@ public class UserValidator {
 	{
 		User subject;
 		
-		subject= users.getUser(userName);
+		try
+		{
+			subject= users.getUser(userName);
+		}catch(NullPointerException e) {
+			return false;
+		}
+		
 
 		if(subject==null)
 			return false;

@@ -36,8 +36,8 @@ public class DietaryAccount implements Serializable {
 		return preferences;
 	}
 
-	public boolean addPreference(String preference) {
-		return this.preferences.add(preference);
+	public void addPreference(String preference) {
+		 this.preferences.add(preference);
 	}
 
 	public boolean removePreferences() {

@@ -164,9 +164,12 @@ public class LoginTotalView extends Observable implements ActionListener{
 				
 			}
 		}
+		if(currentUser!=null)
+		{
+			setChanged();
+			this.notifyObservers(currentUser);
+		}
 		
-		setChanged();
-		this.notifyObservers(currentUser);
 	}
 	
 	public JPanel getLoginPanel()

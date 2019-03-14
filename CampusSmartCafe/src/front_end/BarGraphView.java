@@ -32,12 +32,11 @@ public class BarGraphView extends JPanel{
                     max = Math.max(max, value);
             }
             // paint bars
-
             int width = (getWidth() / bars.size()) - 2;
             int x = 1;
             for (Color color : bars.keySet()) {
                     int value = bars.get(color);
-                    int height = (int) ((getHeight() - 5) * ((double) value / max));
+                    int height = (int) ((getHeight() - 50) * ((double) value / max));
                     g.setColor(color);
                     g.fillRect(x, getHeight() - height, width, height);
                     g.setColor(Color.black);
