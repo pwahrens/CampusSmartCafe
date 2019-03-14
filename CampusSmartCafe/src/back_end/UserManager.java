@@ -20,7 +20,7 @@ public class UserManager {
 		this.users = new LinkedHashMap<String, User>();
 	}
 
-	protected User getUser(String userName) {
+	protected User getUser(String userName) throws NullPointerException{
 		return users.get(userName);
 	}
 

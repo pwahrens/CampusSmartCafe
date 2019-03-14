@@ -5,7 +5,10 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -13,7 +16,7 @@ import javax.swing.JTextField;
 import back_end.DietaryAccount;
 import back_end.Transaction;
 
-public class DietaryAccountView extends JPanel implements ActionListener{
+public class DietaryAccountView extends JPanel implements ActionListener, Observer{
 	private BarGraphView barGraph;
 	private DietaryAccount dietaryAccount;
 	private JTextField calBalanceTextField, prefField;
@@ -31,6 +34,7 @@ public class DietaryAccountView extends JPanel implements ActionListener{
 		
 		maxCalPanel.setLayout(new FlowLayout());
 		prefPanel.setLayout(new FlowLayout());
+		topPanel.setLayout(new BoxLayout(topPanel,1));
 		
 		this.calBalanceLabel = new JLabel("Daily Calories: " + this.dietaryAccount.getMaxCalBalance());
 		this.maxCalPanel.add(this.calBalanceLabel);
@@ -43,14 +47,14 @@ public class DietaryAccountView extends JPanel implements ActionListener{
 		
 		this.calBalanceTextField = new JTextField(6);
 		this.maxCalPanel.add(this.calBalanceTextField);
-		this.prefField = new JTextField(20);
-		this.maxCalPanel.add(this.prefField);
-		
-		this.topPanel.add(maxCalPanel);
-		this.topPanel.add(prefPanel);
-		
+		this.prefField = new JTextField(12);
+		this.prefPanel.add(this.prefField);	
 
 		this.calBalanceTextField.addActionListener(this);
+		this.prefField.addActionListener(this);
+		
+		topPanel.add(maxCalPanel);
+		topPanel.add(prefPanel);
 		
 		this.add(topPanel, BorderLayout.NORTH);
 		
@@ -115,12 +119,36 @@ public class DietaryAccountView extends JPanel implements ActionListener{
 			else
 			{
 				this.dietaryAccount.addPreference(prefField.getText());
-				this.prefLabel = new JLabel("Preferences: " + this.dietaryAccount.getPreferences());
+				this.prefLabel.setText("Preferences: " + this.dietaryAccount.getPreferences());
 			}
 			
 		}
 		this.revalidate();
 		this.repaint();
 	}
+	
+	public void update(Observable o, Object arg)
+	{
+
+		int newCalBalance = this.dietaryAccount.getMaxCalBalance();
+	
+		try {
+			String temp = calBalanceTextField.getText();
+			newCalBalance= Integer.parseInt(temp);
+		} catch (Exception ex){
+			ex.printStackTrace();
+			return;
+			}
+	
+		this.dietaryAccount.setMaxCalBalance(newCalBalance);
+
+		this.calBalanceLabel.setText("Daily Calories: " + this.dietaryAccount.getMaxCalBalance());
+	
+		int nums[] = {dietaryAccount.getCalBalance(),mCal,snCal,soCal};
+		barGraph = new BarGraphView(nums);
+	
+		unusedCalLabel.setText("Unused: " + dietaryAccount.getCalBalance());
+	}
+	
 
 }
