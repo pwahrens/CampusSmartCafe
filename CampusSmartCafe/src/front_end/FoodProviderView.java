@@ -66,7 +66,8 @@ public class FoodProviderView extends JPanel implements ActionListener {
 				}
 			}
 
-			Food[] selectedItemsArray = (Food[]) selectedItems.toArray();
+			Food[] selectedItemsArray = new Food[selectedItems.size()];
+			selectedItemsArray = selectedItems.toArray(selectedItemsArray);
 
 			Transaction transaction = new Transaction(user, selectedItemsArray);
 

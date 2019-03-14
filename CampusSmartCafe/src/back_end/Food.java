@@ -1,8 +1,9 @@
 package back_end;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Food {
+public abstract class Food implements Serializable {
 	private String name;
 	private int calCount;
 	private double price;

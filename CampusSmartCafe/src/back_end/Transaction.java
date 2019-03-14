@@ -1,9 +1,10 @@
 package back_end;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
 
-public class Transaction {
+public class Transaction implements Serializable {
 	private User user;
 	private double totalCost;
 	private int cal, sodaCal, snackCal, mealCal;
@@ -57,6 +58,6 @@ public class Transaction {
 
 	@Override
 	public String toString() {
-		return user + ", Total Cost: $" + totalCost + ", Purchases: " + Arrays.toString(purchases);
+		return "Total Cost: $" + totalCost + "\nPurchases: " + Arrays.toString(purchases);
 	}
 }

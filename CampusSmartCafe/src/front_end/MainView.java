@@ -23,14 +23,14 @@ import back_end.UserValidator;
 public class MainView implements Observer {
 
 	public static User currentUser;
+	public static ExpenseAccountView expenseAccountView;
+	public static DietaryAccountView dietaryAccountView;
 
 	private JFrame frame;
 	private JTabbedPane tabbedPane;
 	private UserManager userData;
 	private CampusMapView mapView;
-	private ExpenseAccountView expenseAccountView;
-	private DietaryAccountView dietaryAccountView;
-
+	
 	public MainView() {
 		currentUser = null;
 
@@ -66,12 +66,12 @@ public class MainView implements Observer {
 		MainView.currentUser = user;
 
 		this.tabbedPane.remove(this.mapView);
-		this.tabbedPane.remove(this.expenseAccountView);
-		this.tabbedPane.remove(this.dietaryAccountView);
+		this.tabbedPane.remove(expenseAccountView);
+		this.tabbedPane.remove(dietaryAccountView);
 
 		this.mapView = new CampusMapView();
-		this.expenseAccountView = new ExpenseAccountView(user.getExpenseAccount());
-		this.dietaryAccountView = new DietaryAccountView(user.getDietaryAccount());
+		expenseAccountView = new ExpenseAccountView(user.getExpenseAccount());
+		dietaryAccountView = new DietaryAccountView(user.getDietaryAccount());
 
 		this.tabbedPane.addTab("Map", mapView);
 		this.tabbedPane.addTab("Expenses", expenseAccountView);

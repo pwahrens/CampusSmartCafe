@@ -2,8 +2,12 @@ package back_end;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
-public abstract class FoodProvider {
+import front_end.MainView;
+
+public abstract class FoodProvider extends Observable {
 	private String name;
 	private ArrayList<Food> menu;
 	private Point location;
@@ -12,6 +16,8 @@ public abstract class FoodProvider {
 		this.name = name;
 		this.menu = menu;
 		this.location = location;
+		this.addObserver(MainView.expenseAccountView);
+		//this.addObserver(MainView.dietaryAccountView);
 	}
 
 	public String getName() {
@@ -52,5 +58,8 @@ public abstract class FoodProvider {
 			dietaryAccount.addTransaction(transaction);
 			expenseAccount.addTransaction(transaction);
 		}
+		
+		setChanged();
+		notifyObservers(transaction);
 	}
 }

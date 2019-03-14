@@ -2,6 +2,7 @@ package back_end;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Observer;
 
 public class VendingMachine extends FoodProvider {
 
