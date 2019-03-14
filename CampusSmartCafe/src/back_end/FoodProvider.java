@@ -17,7 +17,7 @@ public abstract class FoodProvider extends Observable {
 		this.menu = menu;
 		this.location = location;
 		this.addObserver(MainView.expenseAccountView);
-		//this.addObserver(MainView.dietaryAccountView);
+		this.addObserver(MainView.dietaryAccountView);
 	}
 
 	public String getName() {
@@ -52,12 +52,8 @@ public abstract class FoodProvider extends Observable {
 		DietaryAccount dietaryAccount = transaction.getUser().getDietaryAccount();
 		ExpenseAccount expenseAccount = transaction.getUser().getExpenseAccount();
 
-		for (int i = 0; i < transaction.getPurchases().length; ++i) {
-			Food item = transaction.getPurchases()[i];
-
-			dietaryAccount.addTransaction(transaction);
-			expenseAccount.addTransaction(transaction);
-		}
+		dietaryAccount.addTransaction(transaction);
+		expenseAccount.addTransaction(transaction);
 		
 		setChanged();
 		notifyObservers(transaction);

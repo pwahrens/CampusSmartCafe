@@ -69,9 +69,9 @@ public class MainView implements Observer {
 		this.tabbedPane.remove(expenseAccountView);
 		this.tabbedPane.remove(dietaryAccountView);
 
-		this.mapView = new CampusMapView();
 		expenseAccountView = new ExpenseAccountView(user.getExpenseAccount());
 		dietaryAccountView = new DietaryAccountView(user.getDietaryAccount());
+		this.mapView = new CampusMapView();
 
 		this.tabbedPane.addTab("Map", mapView);
 		this.tabbedPane.addTab("Expenses", expenseAccountView);

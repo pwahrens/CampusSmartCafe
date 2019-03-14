@@ -100,7 +100,6 @@ public class CampusMapView extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		for (int i = 0; i < this.foodProviderViews.length; ++i) {
 			if (this.markers[i].contains(e.getX(), e.getY())) {
-				System.out.println(i);
 				this.add(this.foodProviderViews[i]);
 			} else {
 				this.remove(this.foodProviderViews[i]);

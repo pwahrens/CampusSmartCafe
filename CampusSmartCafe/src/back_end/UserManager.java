@@ -1,5 +1,6 @@
 package back_end;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -54,6 +55,8 @@ public class UserManager {
 
 		try {
 			objectStream = new ObjectInputStream(fileStream);
+		} catch (EOFException e) {
+			return;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
