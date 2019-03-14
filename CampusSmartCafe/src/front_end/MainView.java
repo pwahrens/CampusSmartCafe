@@ -77,6 +77,8 @@ public class MainView implements Observer {
 		this.tabbedPane.addTab("Expenses", expenseAccountView);
 		this.tabbedPane.addTab("Diet", dietaryAccountView);
 
+		this.tabbedPane.setSelectedIndex(1);
+		
 		this.frame.validate();
 		this.frame.repaint();
 	}

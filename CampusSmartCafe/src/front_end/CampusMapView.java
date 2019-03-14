@@ -19,6 +19,8 @@ import back_end.Cafe;
 import back_end.Food;
 import back_end.FoodProvider;
 import back_end.Meal;
+import back_end.Snack;
+import back_end.Soda;
 import back_end.VendingMachine;
 
 public class CampusMapView extends JPanel implements MouseListener {
@@ -57,16 +59,16 @@ public class CampusMapView extends JPanel implements MouseListener {
 		foodProviderViews[1] = new FoodProviderView(foodProvider1);
 
 		ArrayList<Food> menu2 = new ArrayList<Food>();
-		menu2.add(new Meal("Lays", 200, 2));
-		menu2.add(new Meal("Kettle Chips", 150, 3));
-		menu2.add(new Meal("Oreos", 160, 2));
+		menu2.add(new Snack("Lays", 200, 2));
+		menu2.add(new Snack("Kettle Chips", 150, 3));
+		menu2.add(new Snack("Oreos", 160, 2));
 		FoodProvider foodProvider2 = new VendingMachine("Snacks", menu2, new Point(60, 400));
 		foodProviderViews[2] = new FoodProviderView(foodProvider2);
 
 		ArrayList<Food> menu3 = new ArrayList<Food>();
-		menu3.add(new Meal("Coca Cola", 150, 2));
-		menu3.add(new Meal("La Croix", 0, 4));
-		menu3.add(new Meal("Pepsi Free", 0, 3));
+		menu3.add(new Soda("Coca Cola", 150, 2));
+		menu3.add(new Soda("La Croix", 0, 4));
+		menu3.add(new Soda("Pepsi Free", 0, 3));
 		FoodProvider foodProvider3 = new VendingMachine("Sodas", menu3, new Point(200, 400));
 		foodProviderViews[3] = new FoodProviderView(foodProvider3);
 	}

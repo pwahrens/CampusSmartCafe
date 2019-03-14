@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import back_end.Cafe;
 import back_end.Food;
 import back_end.FoodProvider;
 import back_end.Transaction;
@@ -80,6 +81,14 @@ public class FoodProviderView extends JPanel implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Exceeding your calorie balance");
 			} else {
 				this.foodProvider.updateAccounts(transaction);
+				
+				if (this.foodProvider instanceof Cafe) {
+					JOptionPane.showMessageDialog(null, ((Cafe) this.foodProvider).getPickupLocation());
+				} else {
+					JOptionPane.showMessageDialog(null, "Vending machine has dispensed your food");
+				}
+				
+				this.setVisible(false);
 			}
 		}
 	}
