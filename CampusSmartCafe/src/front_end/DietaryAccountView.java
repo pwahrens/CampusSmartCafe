@@ -99,7 +99,6 @@ public class DietaryAccountView extends JPanel implements ActionListener, Observ
 				String temp = calBalanceTextField.getText();
 				newCalBalance= Integer.parseInt(temp);
 			} catch (Exception ex){
-				ex.printStackTrace();
 				return;
 				}
 		
