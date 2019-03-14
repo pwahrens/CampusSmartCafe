@@ -118,6 +118,7 @@ public class DietaryAccountView extends JPanel implements ActionListener, Observ
 			
 			else
 			{
+				ArrayList<String> temp = 
 				this.dietaryAccount.addPreference(prefField.getText());
 				this.prefLabel.setText("Preferences: " + this.dietaryAccount.getPreferences());
 			}
@@ -148,6 +149,8 @@ public class DietaryAccountView extends JPanel implements ActionListener, Observ
 		barGraph = new BarGraphView(nums);
 	
 		unusedCalLabel.setText("Unused: " + dietaryAccount.getCalBalance());
+		
+		
 	}
 	
 
