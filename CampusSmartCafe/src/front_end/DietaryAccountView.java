@@ -132,7 +132,12 @@ public class DietaryAccountView extends JPanel implements ActionListener, Observ
 			
 			else
 			{
-				this.dietaryAccount.addPreference(prefField.getText());
+				for(int i=0; i<dietaryAccount.getPreferences().size(); i++)
+				{
+					if(prefField.getText().toUpperCase().equals(dietaryAccount.getPreferences().get(i)))
+							return;
+				}
+				this.dietaryAccount.addPreference(prefField.getText().toUpperCase());
 				this.prefLabel.setText("Preferences: " + this.dietaryAccount.getPreferences());
 			}
 			
