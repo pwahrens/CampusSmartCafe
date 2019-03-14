@@ -61,10 +61,11 @@ public class DietaryAccountView extends JPanel implements ActionListener, Observ
 		//this.transactionPanel = new JPanel();
 		ArrayList<Transaction> transactions = this.dietaryAccount.getTransactions();
 
+		mCal=snCal=soCal=0;
 		for (int i = 0; i < transactions.size(); ++i) {
-			mCal = transactions.get(i).getMealCal();
-			snCal = transactions.get(i).getSnackCal();
-			soCal = transactions.get(i).getSodaCal();
+			mCal += transactions.get(i).getMealCal();
+			snCal += transactions.get(i).getSnackCal();
+			soCal += transactions.get(i).getSodaCal();
 		}
 		int nums[] = {dietaryAccount.getCalBalance(),mCal,snCal,soCal};
 		barGraph = new BarGraphView(nums);
@@ -105,11 +106,25 @@ public class DietaryAccountView extends JPanel implements ActionListener, Observ
 			this.dietaryAccount.setMaxCalBalance(newCalBalance);
 
 			this.calBalanceLabel.setText("Daily Calories: " + this.dietaryAccount.getMaxCalBalance());
+			
+			ArrayList<Transaction> transactions = this.dietaryAccount.getTransactions();
+			
+			mCal=snCal=soCal=0;
+			for (int i = 0; i < transactions.size(); ++i) {
+				mCal += transactions.get(i).getMealCal();
+				snCal += transactions.get(i).getSnackCal();
+				soCal += transactions.get(i).getSodaCal();
+			}
 		
 			int nums[] = {dietaryAccount.getCalBalance(),mCal,snCal,soCal};
+			this.remove(barGraph);
 			barGraph = new BarGraphView(nums);
+			this.add(barGraph, BorderLayout.CENTER);
 		
 			unusedCalLabel.setText("Unused: " + dietaryAccount.getCalBalance());
+			mealCalLabel.setText("Meal: " + mCal);
+			snackCalLabel.setText("Snack: " + snCal);
+			sodaCalLabel.setText("Soda: " + soCal);
 		}
 		if(e.getSource()==prefField)
 		{
@@ -133,16 +148,22 @@ public class DietaryAccountView extends JPanel implements ActionListener, Observ
 		
 		ArrayList<Transaction> transactions = this.dietaryAccount.getTransactions();
 		
+		mCal=snCal=soCal=0;
 		for (int i = 0; i < transactions.size(); ++i) {
-			mCal = transactions.get(i).getMealCal();
-			snCal = transactions.get(i).getSnackCal();
-			soCal = transactions.get(i).getSodaCal();
+			mCal += transactions.get(i).getMealCal();
+			snCal += transactions.get(i).getSnackCal();
+			soCal += transactions.get(i).getSodaCal();
 		}
 	
 		int nums[] = {dietaryAccount.getCalBalance(),mCal,snCal,soCal};
+		this.remove(barGraph);
 		barGraph = new BarGraphView(nums);
+		this.add(barGraph, BorderLayout.CENTER);
 	
 		unusedCalLabel.setText("Unused: " + dietaryAccount.getCalBalance());
+		mealCalLabel.setText("Meal: " + mCal);
+		snackCalLabel.setText("Snack: " + snCal);
+		sodaCalLabel.setText("Soda: " + soCal);
 		
 		this.revalidate();
 		this.repaint();
